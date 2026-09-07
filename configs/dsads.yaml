@@ -1,0 +1,46 @@
+dataset:
+  name: dsads
+  root: null  # Set with --data-root or replace with the extracted DSADS path.
+  sampling_rate_hz: 25
+  sequence_length: 125
+  channels: 45
+  classes: 19
+
+preprocessing:
+  # Applied independently to each channel within each fixed five-second file.
+  filter: median
+  median_kernel_size: 3
+  median_boundary_mode: mirror
+  # Element-wise statistics have shape [1, 45, 125].
+  normalization: development_elementwise_zscore
+  epsilon: 1.0e-8
+
+split:
+  development_subjects: [1, 2, 3, 4, 5, 6, 8]
+  test_subjects: [7]
+  validation: window_level_kfold
+  folds: 3
+  kfold_shuffle: true
+  kfold_random_state: 42
+
+model:
+  name: SSMInception
+  embedding_dim: 32
+  s4d_state_size: 32
+  s4d_dropout: 0.1
+  inception_channels: [64, 128]
+  inception_kernels: [3, 5, 7, 9]
+
+training:
+  seed: 9527
+  epochs: 100
+  batch_size: 64
+  optimizer: Adam
+  learning_rate: 1.0e-3
+  weight_decay: 0.0
+  loss: cross_entropy
+  checkpoint_metric: validation_accuracy
+  deterministic: true
+
+output_dir: outputs/dsads
+
