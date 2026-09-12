@@ -19,8 +19,6 @@ OpenSource/
 ├── ssm_inception/data.py          # DSADS loader and leakage-safe test split
 ├── train.py                       # 3-fold training, checkpointing, evaluation
 ├── benchmark.py                   # Params/FLOPs/latency/RSS/throughput
-├── PROTOCOL.md                    # preprocessing and subject split details
-├── HARDWARE_PROTOCOL.md           # Raspberry Pi timing/memory/power procedure
 └── environment.yml                # reference software environment
 ```
 
