@@ -64,21 +64,26 @@ manifest, and test predictions under `outputs/dsads/`.
 The expected data audit is 9,120 total windows, split into 7,980 development
 windows (subjects 1–6 and 8) and 1,140 independent test windows (subject 7).
 
-## Hardware benchmark
+## Diagnostic hardware benchmark
 
-Run from this directory on the target device:
+Run from this directory on the target device for a controlled DSADS diagnostic
+measurement:
 
 ```bash
 python benchmark.py \
   --checkpoint outputs/dsads/fold_0/checkpoint.pt \
   --device cpu \
   --threads 4 \
-  --warmup 50 \
-  --iterations 1000
+  --warmup 100 \
+  --iterations 5000
 ```
 
-See [PROTOCOL.md](PROTOCOL.md) and
-[HARDWARE_PROTOCOL.md](HARDWARE_PROTOCOL.md) before reporting results.
+The helper above uses an explicitly controlled CPU thread count and the released
+DSADS input shape. It is therefore a diagnostic benchmark, not a direct
+reproduction of the WISDM measurements reported in Table VI. The reported
+Table VI measurements retained the default PyTorch CPU thread configuration.
+See [PROTOCOL.md](PROTOCOL.md) and [HARDWARE_PROTOCOL.md](HARDWARE_PROTOCOL.md)
+before reporting or comparing results.
 
 ## Scope and licensing
 
